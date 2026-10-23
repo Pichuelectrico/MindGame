@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f60718293a4b5c6d7e8f01, type: 3}
+  m_Name: BossHeavyAttack
+  m_EditorClassIdentifier: 
+  actionId: BossHeavyAttack
+  displayName: Ataque pesado del jefe
+  clipName: Mutant_JumpAttack
+  duration: 1.6
+  range: 3.5
+  travelDistance: 1.65
+  staminaCost: 15
+  requiresWeapon: 0
+  needsTarget: 1
+  direction: 0
+  roleRestriction: 1
+  fallbackActionId: Punch
+  useRootMotion: 1
+  aliases: [boss attack, heavy, mutant attack]
+  isHeavy: 1

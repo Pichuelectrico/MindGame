@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f60718293a4b5c6d7e8f01, type: 3}
+  m_Name: AttackSlide
+  m_EditorClassIdentifier: 
+  actionId: AttackSlide
+  displayName: Barrida deslizante
+  clipName: RunningSlide
+  duration: 1.5
+  range: 3.0
+  travelDistance: 6.42
+  staminaCost: 12
+  requiresWeapon: 0
+  needsTarget: 0
+  direction: 0
+  roleRestriction: 0
+  fallbackActionId: Dodge
+  useRootMotion: 0
+  aliases: [slide, barrida, desliz, running slide]
+  isHeavy: 0

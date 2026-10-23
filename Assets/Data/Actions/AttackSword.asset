@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f60718293a4b5c6d7e8f01, type: 3}
+  m_Name: AttackSword
+  m_EditorClassIdentifier: 
+  actionId: AttackSword
+  displayName: Ataque de espada
+  clipName: SwordShield_Slash
+  duration: 1.3
+  range: 3.2
+  travelDistance: 3.48
+  staminaCost: 12
+  requiresWeapon: 1
+  needsTarget: 1
+  direction: 0
+  roleRestriction: 0
+  fallbackActionId: Punch
+  useRootMotion: 0
+  aliases: [attack, ataca, atacar, sword, espada, slash]

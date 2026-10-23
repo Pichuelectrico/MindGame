@@ -112,3 +112,13 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# --- MindGame additions (2026-10-23) ---
+# Resultados transitorios de tests y basura del SO
+TestResults/
+.DS_Store
+
+# Pack de skybox de terceros (374 MB, redistribucion no verificada).
+# El README indica como descargarlo.
+Assets/SkySeries Freebie/
+Assets/SkySeries Freebie.meta

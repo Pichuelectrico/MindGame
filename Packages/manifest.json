@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.gamelovers.mcp-unity": "https://github.com/CoderGamester/mcp-unity.git",
     "com.unity.ai.assistant": "2.20.0-pre.2",
     "com.unity.ai.inference": "2.6.1",
     "com.unity.ai.navigation": "2.0.15",
