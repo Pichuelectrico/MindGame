@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MindGame — Informe para el jurado</title>
+  <style>
+    @page { size: A4; margin: 14mm 15mm 14mm 15mm; }
+    :root {
+      --ink: #1a1a1a;
+      --muted: #444;
+      --line: #ccc;
+      --accent: #8b1515;
+      --slow: #8b1515;
+      --fast: #1a5c3a;
+      --boxbg: #fafafa;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      color: var(--ink);
+      font-family: "Times New Roman", Times, "Liberation Serif", serif;
+      font-size: 10.5pt;
+      line-height: 1.32;
+      background: #fff;
+    }
+    .page {
+      max-width: 182mm;
+      margin: 0 auto;
+      padding: 4mm 0 2mm;
+    }
+    header.cover {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 6pt;
+      margin-bottom: 10pt;
+    }
+    header.cover h1 {
+      margin: 0 0 3pt;
+      font-size: 16pt;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+    }
+    header.cover .meta,
+    header.cover .integrantes {
+      margin: 0;
+      font-size: 10pt;
+      color: var(--muted);
+    }
+    header.cover .integrantes {
+      margin-top: 3pt;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    h2 {
+      margin: 11pt 0 5pt;
+      font-size: 12pt;
+      color: var(--accent);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2pt;
+      page-break-after: avoid;
+    }
+    h3 {
+      margin: 7pt 0 3pt;
+      font-size: 10.5pt;
+      page-break-after: avoid;
+    }
+    p { margin: 0 0 6pt; text-align: justify; hyphens: auto; }
+    ul {
+      margin: 0 0 6pt 1.1em;
+      padding: 0;
+    }
+    li { margin: 0 0 2pt; text-align: justify; }
+    .box {
+      border: 1px solid var(--line);
+      padding: 6pt 8pt;
+      margin: 6pt 0 8pt;
+      background: var(--boxbg);
+    }
+    .box strong { color: var(--accent); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5pt 0 8pt;
+      font-size: 9.5pt;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 3pt 5pt;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f3f3f3; font-weight: 700; }
+    .note {
+      font-size: 9pt;
+      color: var(--muted);
+      margin-top: 3pt;
+      display: block;
+    }
+    /* Diagramas */
+    .diagram {
+      border: 1px solid var(--line);
+      padding: 7pt 8pt 6pt;
+      margin: 6pt 0 8pt;
+      background: #fff;
+      page-break-inside: avoid;
+    }
+    .diagram .d-title {
+      margin: 0 0 5pt;
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 3pt 0;
+      justify-content: flex-start;
+    }
+    .node {
+      border: 1px solid #999;
+      border-radius: 3px;
+      padding: 4pt 5pt;
+      background: var(--boxbg);
+      font-size: 8pt;
+      line-height: 1.25;
+      max-width: 78pt;
+      text-align: center;
+    }
+    .node.bottleneck {
+      border-color: var(--slow);
+      border-width: 2px;
+      background: #fdf0f0;
+    }
+    .node.fast {
+      border-color: var(--fast);
+      border-width: 2px;
+      background: #eef7f1;
+    }
+    .arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 3pt;
+      font-size: 11pt;
+      color: #666;
+      flex-shrink: 0;
+    }
+    .latency-tag {
+      display: block;
+      margin-top: 2pt;
+      font-size: 7.5pt;
+      font-weight: 700;
+    }
+    .latency-tag.slow { color: var(--slow); }
+    .latency-tag.fast { color: var(--fast); }
+    .levels {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5pt;
+    }
+    .level {
+      border: 1px solid var(--line);
+      border-left-width: 4px;
+      padding: 5pt 7pt;
+      background: var(--boxbg);
+    }
+    .level.strategic { border-left-color: var(--slow); }
+    .level.tactical { border-left-color: var(--fast); }
+    .level .lvl-label {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin: 0 0 3pt;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .level.strategic .lvl-label { color: var(--slow); }
+    .level.tactical .lvl-label { color: var(--fast); }
+    .level .lvl-body {
+      font-size: 8.5pt;
+      line-height: 1.3;
+      margin: 0;
+      text-align: left;
+    }
+    .level .chain {
+      margin-top: 4pt;
+      font-size: 8pt;
+      color: var(--muted);
+    }
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 0; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="cover">
+      <h1>MindGame — Informe técnico para el jurado</h1>
+      <p class="meta">
+        Combate táctico 3D con IA local · Categoría CMP (IA, endpoints y videojuegos) · Octubre 2026
+      </p>
+      <p class="integrantes">Integrantes: Joshua Reinoso</p>
+    </header>
+
+    <h2>1. Problema</h2>
+    <p>
+      En el discurso actual sobre inteligencia artificial se afirma, con frecuencia, que los modelos de
+      lenguaje (LLM) ya pueden asumir <em>decisiones críticas en tiempo real</em>: reaccionar a un entorno
+      cambiante, elegir la acción correcta y hacerlo a tiempo. Esa afirmación suele evaluarse en
+      demos offline, chatbots o tareas sin presión temporal estricta. Falta un entorno donde el costo
+      de una respuesta tardía sea inmediato y observable.
+    </p>
+    <p>
+      <strong>MindGame</strong> plantea esa prueba en un videojuego de combate. El juego ofrece un marco
+      seguro y divertido para medir si un LLM local puede competir —en latencia y calidad de decisión—
+      contra un jugador humano. Para reducir la complejidad de control del modelo, las acciones del
+      combate se simplifican a un catálogo cerrado de decisiones (golpear, esquivar, correr, lanzar,
+      lasers, etc.). Aun así, el combate es <strong>en tiempo real y no por turnos</strong>: el reloj
+      no se detiene para esperar la red; quien responde tarde pierde la ventana de acción.
+    </p>
+
+    <h2>2. Relación con la categoría CMP</h2>
+    <p>
+      El proyecto se enmarca en CMP por la conjugación explícita de:
+    </p>
+    <ul>
+      <li><strong>Inteligencia artificial</strong> generativa (LLM local) aplicada a decisión de agente;</li>
+      <li><strong>Endpoints / integración de sistemas</strong> (cliente HTTP asíncrono, telemetría JSONL, dashboard web);</li>
+      <li><strong>Videojuegos</strong> como banco de prueba de tiempo real (Unity, combate, UX de comandos).</li>
+    </ul>
+    <p>
+      MindGame no es solo una demo de “NPC inteligente”: es un experimento controlado sobre los límites
+      de latencia y control cuando un modelo de lenguaje debe actuar bajo las mismas reglas que un
+      jugador humano.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Rol en la tesis del informe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>LLM directo</td>
+          <td>Prueba la hipótesis “el modelo decide cada acción a tiempo”.</td>
+        </tr>
+        <tr>
+          <td>BotBrain heurístico</td>
+          <td>Línea base de latencia y fallback de seguridad.</td>
+        </tr>
+        <tr>
+          <td>Modo Estratega</td>
+          <td>Arquitectura híbrida: LLM elige estrategia; algoritmo ejecuta.</td>
+        </tr>
+        <tr>
+          <td>Dashboard JSONL</td>
+          <td>Evidencia observable de modo, persona y latencias.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. Solución y cómo funciona</h2>
+    <p>
+      El prototipo está construido en <strong>Unity 6000.6.5f1 (URP)</strong>. La arquitectura separa
+      dos capas: una de <em>plan</em> (qué acciones ejecutar, a partir de texto, rueda de cartas o
+      respuesta del LLM) y una de <em>ejecución</em> (cómo animar, mover y aplicar daño). Todos los
+      personajes, incluido el del jugador, son controladores autónomos; el humano solo dicta o
+      selecciona el plan del avatar principal.
+    </p>
+
+    <h3>3.1 Interacción del jugador</h3>
+    <ul>
+      <li><strong>Modo Manual:</strong> movimiento y acciones inmediatas (teclado/ratón).</li>
+      <li><strong>Modo Comandos:</strong> pausa lógica activa y <strong>rueda radial de cartas</strong>
+        para armar un plan corto (hasta 6 acciones) sin escribir texto libre.</li>
+    </ul>
+
+    <h3>3.2 El jefe (boss) y la IA</h3>
+    <p>
+      El boss se conecta a un <strong>LLM local vía HTTP</strong> (Ollama; en las pruebas se usó
+      <code>qwen2.5:7b</code>). Hay tres modos de decisión, conmutables en juego:
+      <strong>LLM directo</strong> (el modelo responde con un plan de acciones por petición),
+      <strong>Heurístico / BotBrain</strong> (algoritmo local sin red) y
+      <strong>Estratega</strong> (el LLM elige cada ~6&nbsp;s una personalidad Distance / Fighter / Normal;
+      el algoritmo ejecuta la táctica en tiempo real). Complementan la experiencia el
+      <strong>modo Furia</strong> (&lt;30&nbsp;% HP), ataques <strong>láser recto</strong> y
+      <strong>láser tornado</strong> con telegrafía, orbes de vida y un <strong>dashboard web</strong>
+      sobre el log JSONL de decisiones.
+    </p>
+
+    <h3>3.3 Diagrama — modo LLM directo</h3>
+    <div class="diagram">
+      <p class="d-title">Flujo de una decisión (cuello de botella en la inferencia)</p>
+      <div class="flow">
+        <div class="node">Sensores del juego<br/><span style="color:#666">posiciones · vida · cooldowns · acciones disponibles</span></div>
+        <div class="arrow">→</div>
+        <div class="node">Prompt de decisión<br/><span style="color:#666">texto con contexto del combate</span></div>
+        <div class="arrow">→</div>
+        <div class="node bottleneck">LLM local<br/>Ollama qwen2.5:7b<br/><span style="color:#666">endpoint HTTP</span>
+          <span class="latency-tag slow">≈ 426 ms mediana · p90 ≈ 578 ms</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node">Respuesta en texto</div>
+        <div class="arrow">→</div>
+        <div class="node">Parser<br/><span style="color:#666">texto → acción válida</span></div>
+        <div class="arrow">→</div>
+        <div class="node">ActionExecutor<br/><span style="color:#666">ejecuta en tiempo real</span></div>
+      </div>
+      <span class="note">Coste real medido en telemetría del prototipo: la llamada al LLM es el cuello de botella frente al ciclo de combate.</span>
+    </div>
+
+    <h3>3.4 Diagrama — modo Estratega (dos niveles)</h3>
+    <div class="diagram">
+      <p class="d-title">Separación estrategia (lenta) / táctica (rápida)</p>
+      <div class="levels">
+        <div class="level strategic">
+          <p class="lvl-label">Nivel estratégico — lento · LLM cada ~6 s</p>
+          <p class="lvl-body">
+            El LLM lee el estado del combate y elige la <strong>personalidad/estrategia vigente</strong>:
+            Distance, Fighter o Normal. No decide el golpe concreto de cada frame.
+            <span class="latency-tag slow" style="display:inline;margin-left:4pt;">Latencia ≈ 426 ms (misma orden que LLM directo, pero pocas veces)</span>
+          </p>
+          <p class="chain">Estado del combate → Prompt estratégico → Ollama → Persona vigente</p>
+        </div>
+        <div class="level tactical">
+          <p class="lvl-label">Nivel táctico — rápido · BotBrain cada tick (~0 ms)</p>
+          <p class="lvl-body">
+            El <strong>algoritmo heurístico local</strong> traduce la estrategia vigente en la acción
+            concreta: perseguir, esquivar, laser, buscar orbes, activar furia, etc., y la entrega al
+            ActionExecutor sin esperar a la red.
+            <span class="latency-tag fast" style="display:inline;margin-left:4pt;">Latencia ≈ 0 ms (decisión local inmediata)</span>
+          </p>
+          <p class="chain">Persona vigente → BotBrain (tick) → acción concreta → ActionExecutor</p>
+        </div>
+      </div>
+      <span class="note">Contraste visual: borde rojo = costo LLM; borde verde = costo algoritmo. El jugador pelea contra el nivel táctico; el LLM solo reorienta la estrategia.</span>
+    </div>
+
+    <h2>4. Resultados / estado actual</h2>
+    <p>
+      Las pruebas de combate contra un usuario real en Game Mode muestran un patrón claro y repetible:
+      el LLM <strong>puede predecir</strong> acciones útiles —es decir, “entiende” el estado y propone
+      planes coherentes con el catálogo—, pero <strong>entrega las respuestas tarde</strong> respecto
+      al ritmo del combate. En un videojuego de acción continua, la ventana útil para esquivar un
+      golpe, cerrar distancia o lanzar un laser se mide en décimas de segundo. Si la decisión llega
+      después de esa ventana, el plan correcto llega cuando el contexto ya cambió: el jugador se movió,
+      el cooldown expiró o el daño ya se aplicó.
+    </p>
+    <p>
+      Ese desfase no es un fallo puntual de una sola petición. Incluso con endpoint <em>local</em>
+      (sin red pública), la latencia de inferencia del modelo suele situarse en cientos de milisegundos
+      por decisión. En contraste, el heurístico BotBrain responde en el mismo tick del motor: órdenes
+      de magnitud más rápido, porque no serializa contexto a texto, no espera HTTP ni parsea una
+      respuesta libre. Frente al ciclo de combate, esa diferencia es la que decide si el jefe “reacciona”
+      o “parece distraído”.
+    </p>
+
+    <div class="box">
+      <strong>Métrica orientativa (telemetría del prototipo, log de decisiones).</strong>
+      Sobre una muestra del archivo <code>llm-decisions.jsonl</code> del proyecto:
+      decisiones etiquetadas como LLM (n≈46) con mediana ≈ <strong>426&nbsp;ms</strong> y p90 ≈ <strong>578&nbsp;ms</strong>;
+      decisiones heurísticas (n≈438) con latencia reportada ≈ <strong>0&nbsp;ms</strong> (decisión local inmediata).
+      <span class="note">Valores de sesión de desarrollo; no sustituyen un banco formal, pero ilustran el gap temporal entre “pensar con el modelo” y “actuar con el algoritmo”.</span>
+    </div>
+
+    <p>
+      La alternativa <strong>Estratega</strong> —el algoritmo gestiona la táctica frame a frame y el LLM
+      solo actualiza la estrategia vigente cada ~6&nbsp;s— responde mejor a las acciones del jugador en
+      tiempo real. Conserva algo del “juicio” del modelo (qué estilo de pelea adoptar) sin pagar el
+      costo de una inferencia por cada golpe. En la práctica, el jefe deja de “congelarse” esperando
+      al LLM y mantiene presión táctica coherente con la personalidad elegida (mantener distancia,
+      pelear de cerca, o un equilibrio Normal).
+    </p>
+    <p>
+      En síntesis del estado actual del prototipo: el LLM es útil como capa de intención o de
+      reorientación estratégica; el algoritmo local es quien sostiene la acción bajo presión temporal.
+      Usar solo el LLM como controlador de cada acción no alcanza, hoy, el umbral de reactividad que
+      exige un combate continuo contra un humano.
+    </p>
+
+    <h2>5. Conclusiones</h2>
+    <p>
+      <strong>A octubre de 2026</strong>, en este entorno de combate continuo, la inteligencia artificial
+      generativa <em>aún no es, por sí sola, la primera opción fiable</em> para eventos que exigen
+      acción en tiempo real en videojuegos. La razón principal no es la “falta de inteligencia” del
+      modelo —el LLM predice planes razonables—, sino el <strong>coste temporal de producir esa
+      predicción</strong>: cientos de milisegundos por decisión frente a un ciclo de juego que no
+      espera. En otras palabras: el modelo llega a una buena respuesta, pero llega tarde para el
+      instante en que esa respuesta importaba.
+    </p>
+    <p>
+      El algoritmo local responde a tiempo precisamente porque evita esa cadena (prompt → HTTP →
+      inferencia → parseo). Opera sobre reglas y sensores ya disponibles en memoria del proceso Unity,
+      con latencia despreciable respecto al frame. Por eso el modo Estratega funciona mejor como
+      arquitectura de compromiso: el LLM aporta variedad y criterio a baja frecuencia; el BotBrain
+      garantiza reactividad a alta frecuencia.
+    </p>
+    <p>
+      Implicación para el estado del arte que se discute en CMP: conviene distinguir
+      <em>capacidad de razonar un plan</em> de <em>capacidad de ejecutarlo bajo deadline de tiempo
+      real</em>. MindGame sugiere que, en 2026, el valor práctico de un LLM en combate aparece cuando
+      se usa como capa de estrategia o supervisión, y un sistema determinista ejecuta la táctica bajo
+      presión temporal —no cuando se pretende que el modelo sea, solo, el controlador de cada acción
+      del agente.
+    </p>
+  </div>
+</body>
+</html>
